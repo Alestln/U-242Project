@@ -2,35 +2,31 @@
 {
     internal class Line
     {
-        private Value[] _values;
+        private readonly Value[] _values;
 
         public Line(Value[] values)
         {
             _values = values;
         }
 
-        public bool IsFilled()
+        public char? IsWinningLine()
         {
-            foreach (var value in _values)
+            if (_values.Length == 0 || _values[0].Symbol == Value.Default)
             {
-                if (value.Symbol == '*')
-                {
-                    return false;
-                }
+                return null;
             }
-            return true;
-        }
 
-        public bool IsWinningLine(char symbol)
-        {
-            foreach (var value in _values)
+            var firstSymbol = _values[0].Symbol;
+
+            foreach (var item in _values)
             {
-                if (value.Symbol != symbol)
+                if (item.Symbol != firstSymbol)
                 {
-                    return false;
+                    return null;
                 }
             }
-            return true;
+
+            return firstSymbol;
         }
     }
 }

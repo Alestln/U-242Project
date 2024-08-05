@@ -2,11 +2,31 @@
 {
     internal class Value
     {
-        private char _symbol = '*';
-        public char Symbol 
+        public const char Default = '*';
+        public const char Cross = 'x';
+        public const char Round = 'o';
+
+        private char _symbol;
+
+        public Value()
         {
-            get { return _symbol; }
-            set { _symbol = value; }
+            _symbol = Default;
+        }
+
+        public char Symbol 
+        { 
+            get => _symbol;
+            set
+            {
+                if (value == Cross || value == Round)
+                {
+                    _symbol = value;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Invalid symbol.");
+                }
+            }
         }
     }
 }
